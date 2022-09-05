@@ -1,0 +1,62 @@
+{
+  "name": "pug-boilerplate",
+  "version": "1.0.0",
+  "description": "A boilerplate for website development project using Pug.",
+  "main": "index.js",
+  "scripts": {
+    "all": "run-p server watch:*",
+    "server": "browser-sync start --server --files='src/**/*.pug, src/**/css/*.css, src/**/js/*.js' --startPath='dist/'",
+    "watch:scss": "chokidar \"src/assets/scss/\" --command \"npm run compile:scss\" --initial",
+    "watch:pug": "pug src/pug/ --hierarchy -o dist -P -w",
+    "watch:img": "chokidar \"src/assets/img/*\" --command \"node imagemin.js\" --initial",
+    "watch:js": "cpx \"src/assets/js/*.js\" dist/assets/js/ -w",
+    "format": "run-s format:styles format:js",
+    "format:styles": "stylelint --fix **/*.{css,scss,sass}",
+    "format:scss": "stylelint --fix **/*.scss",
+    "format:js": "eslint --fix --ext .js --ignore-path .gitignore .",
+    "compile:scss": "run-s format:scss compile:scss2css compile:autoprefixer",
+    "compile:scss2css": "node-sass src/assets/scss/common.scss --importer node_modules/node-sass-globbing/index.js -o dist/assets/css --output-style expanded --source-map dist/assets/css",
+    "compile:autoprefixer": "postcss dist/assets/css/common.css -u autoprefixer -o dist/assets/css/common.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ydah/pug-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "Yudai TAKADA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ydah/pug-boilerplate/issues"
+  },
+  "homepage": "https://github.com/ydah/pug-boilerplate#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.1.0",
+    "babel-eslint": "^10.1.0",
+    "browser-sync": "^2.26.13",
+    "chokidar": "^3.4.3",
+    "chokidar-cli": "^2.1.0",
+    "cpx": "^1.5.0",
+    "eslint": "^7.17.0",
+    "imagemin-cli": "^6.0.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-keep-folder": "^5.3.2",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-pngquant": "^9.0.1",
+    "imagemin-svgo": "^8.0.0",
+    "node-sass": "^5.0.0",
+    "node-sass-globbing": "0.0.23",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.2.2",
+    "postcss-cli": "^8.3.1",
+    "prettier": "^2.2.1",
+    "pug": "^3.0.0",
+    "pug-cli2": "^1.0.0-alpha6.1",
+    "pug-loader": "^2.4.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-prettier": "^1.1.2",
+    "stylelint-scss": "^3.18.0",
+    "watch": "^1.0.2"
+  }
+}
