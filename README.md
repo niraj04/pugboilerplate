@@ -22,4 +22,4 @@ npm run format
 
 # Author
 
-[ydah](https://github.com/ydah)
+Niraj jain 
